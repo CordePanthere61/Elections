@@ -52,6 +52,6 @@ class RegisterValidator
             $_SESSION['invalidSinNumber'] = "Le NAS doit respecter le format : 123456789";
             return 0;
         }
-        return 0;
+        return 1;
     }
 }
