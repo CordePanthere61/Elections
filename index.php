@@ -19,7 +19,7 @@
 <body>
     <div class="container w-50 mt-5 pt-5">
         <h1>Texte à venir</h1>
-        <form class="bg-light p-5 mx-auto border-white w-50" action="app/home.php" method="post">
+        <form class="bg-light p-5 mx-auto border-white w-75" action="app/home.php" method="post">
 
             <?php
             if (isset($_SESSION['error'])) {

@@ -8,7 +8,7 @@ if (!isset($_SESSION['is_logged'])) {
 
     $db = buildDataBase();
 
-    $result = $db->query("SELECT user_id, username, password, firstname, lastname, email FROM users WHERE username = '$username'");
+    $result = $db->query("SELECT id, username, password, firstname, lastname, email FROM users WHERE username = '$username'");
     $rows = $db->fetch($result);
     $db->close();
     if (is_null($rows)) {
@@ -24,7 +24,7 @@ if (!isset($_SESSION['is_logged'])) {
         redirect("../index.php");
     } else {
         $_SESSION['is_logged'] = true;
-        $_SESSION['user_id'] = $rows['user_id'];
+        $_SESSION['user_id'] = $rows['id'];
         $_SESSION['username'] = $rows['username'];
         $_SESSION['firstname'] = $rows['firstname'];
         $_SESSION['lastname'] = $rows['lastname'];

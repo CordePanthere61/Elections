@@ -20,7 +20,7 @@
         <?php
         if (isset($_SESSION['missingInputs'])) {
             ?>
-            <div class="alert alert-danger"><?= $_SESSION['missingInputs']?></div>
+            <div class="alert alert-danger p-1 text-sm-start d-inline-block"><?= $_SESSION['missingInputs']?></div>
             <?php
             unset($_SESSION['missingInputs']);
         }
@@ -28,25 +28,69 @@
 
         <div class="form-row row mb-4">
             <div class="form-group col-md">
-                <label for="firstname"><i class=""></i> Prénom</label>
-                <input name="firstname" type="text" class="form-control">
+                <label for="firstname"><i class="fa fa-font"></i> Prénom</label>
+                <input name="firstname" type="text" class="form-control" placeholder="E.g. : Bruce">
+                <?php
+                if (isset($_SESSION['invalidFirstName'])) {
+                    ?>
+                    <div class="alert alert-danger p-1 text-sm-start d-block"><?= $_SESSION['invalidFirstName']?></div>
+                    <?php
+                    unset($_SESSION['invalidFirstName']);
+                }
+                ?>
             </div>
 
             <div class="form-group col-md">
-                <label for="lastname">Nom</label>
-                <input name="lastname" type="text" class="form-control">
+                <label for="lastname"><i class="fa fa-font"></i> Nom</label>
+                <input name="lastname" type="text" class="form-control" placeholder="E.g. : Wayne">
+                <?php
+                if (isset($_SESSION['invalidLastName'])) {
+                    ?>
+                    <div class="alert alert-danger p-1 text-sm-start d-block"><?= $_SESSION['invalidLastName']?></div>
+                    <?php
+                    unset($_SESSION['invalidLastName']);
+                }
+                ?>
             </div>
         </div>
 
         <div class="form-row row mb-4">
             <div class="form-group col-md">
                 <label for="username"><i class="fa fa-user-circle"></i> Nom d'Utilisateur</label>
-                <input name="username" type="text" class="form-control">
+                <input name="username" type="text" class="form-control" placeholder="E.g. : CordePanthere61">
             </div>
 
             <div class="form-group col-md">
                 <label for="email"><i class="fa fa-at"></i> Adresse Courriel</label>
-                <input name="email" type="email" class="form-control">
+                <input name="email" type="email" class="form-control" placeholder="E.g. : xyz@example.com">
+            </div>
+        </div>
+
+        <div class="form-row row mb-4">
+            <div class="form-group col-md">
+                <label for="phoneNumber"><i class="fa fa-phone"></i> Numéro de Téléphone</label>
+                <input name="phoneNumber" type="tel" class="form-control" placeholder="E.g. : (XXX) XXX-XXXX">
+                <?php
+                if (isset($_SESSION['invalidPhoneNumber'])) {
+                    ?>
+                    <div class="alert alert-danger p-1 text-sm-start d-block"><?= $_SESSION['invalidPhoneNumber']?></div>
+                    <?php
+                    unset($_SESSION['invalidPhoneNumber']);
+                }
+                ?>
+            </div>
+
+            <div class="form-group col-md">
+                <label for="sinNumber"><i class="fa fa-info-circle"></i> Numéro d'assurance sociale</label>
+                <input name="sinNumber" type="password" class="form-control" placeholder="E.g. : 123456789">
+                <?php
+                if (isset($_SESSION['invalidSinNumber'])) {
+                    ?>
+                    <div class="alert alert-danger p-1 text-sm-start d-block"><?= $_SESSION['invalidSinNumber']?></div>
+                    <?php
+                    unset($_SESSION['invalidSinNumber']);
+                }
+                ?>
             </div>
         </div>
 
