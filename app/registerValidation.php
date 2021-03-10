@@ -7,8 +7,10 @@
     $firstname = addslashes($_POST['firstname']) ?? '';
     $lastname = addslashes($_POST['lastname']) ?? '';
     $email = addslashes($_POST['email']) ?? '';
+    $sin = addslashes($_POST['sinNumber'] ?? '');
+    $gender = addslashes($_POST['gender'] ?? '');
     $db = buildDataBase();
-    $db->query("INSERT INTO users (username, password, firstname, lastname, email) VALUES ('$username', '$password', '$firstname', '$lastname', '$email')");
+    $db->query("INSERT INTO users (username, password, firstname, lastname, email, sin, gender) VALUES ('$username', '$password', '$firstname', '$lastname', '$email', '$sin', '$gender')");
     $db->close();
     echo password_verify($password . PASSWORD_PEPPER, PASSWORD_DEFAULT);
 ?>

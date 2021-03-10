@@ -99,13 +99,35 @@
             <input name="password" type="password" class="form-control">
             <br>
         </div>
-
+        <?php
+        if (isset($_SESSION['invalidPassword'])) {
+            ?>
+            <div class="alert alert-danger p-1 text-sm-start d-block"><?= $_SESSION['invalidPassword']?></div>
+            <?php
+            unset($_SESSION['invalidPassword']);
+        }
+        ?>
         <div class="form-group">
             <label for="confirmPassword"><i class="fa fa-lock"></i> Confirmer le mot de passe</label>
             <input name="confirmPassword" type="password" class="form-control">
-            <br>
         </div>
 
+        <div class="form-group py-3 d-flex justify-content-around">
+            <label for="gender"><i class="fa fa-transgender-alt"></i> Je suis...</label>
+            <div class="radio-group">
+                <input type="radio" name="gender" value="male">
+                <label for="male">un Homme</label>
+            </div>
+            <div class="radio-group">
+                <input type="radio" name="gender" value="female">
+                <label for="female">une Femme</label>
+            </div>
+            <div class="form-group">
+                <input type="radio" name="gender" value="other">
+                <label for="other">Non-Binaire</label><br>
+            </div>
+        </div>
+        
         <div class="d-flex justify-content-between">
             <button type="button" class="btn btn-secondary"><a class="link text-white" href="../index.php"><i class="fa fa-arrow-left"></i> Annuler</a></button>
             <button type="submit" class="btn btn-secondary">Créer un compte</button>

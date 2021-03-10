@@ -5,6 +5,7 @@ define('PASSWORD_PEPPER', 'yIwShRTKZ3Y5hrh5RNG/05XhrQwGDNd6djQBsqdSXt0=');
 require_once "Database.php";
 require_once "RegisterValidator.php";
 
+session_set_cookie_params(3600, null, null, false, true);
 session_start();
 
 function buildDataBase(): Database
