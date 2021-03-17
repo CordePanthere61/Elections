@@ -10,15 +10,27 @@ class RegisterValidator
     private $regexPassword = "/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/";
 
 
+    public function areFieldsEmpty() : bool
+    {
+        foreach ($_POST as $key => $value) {
+            if ($value == "") {
+                $_SESSION['registerError'] = "Tous les champs sont obligatoires";
+                return true;
+            }
+        }
+        return false;
+    }
+
     public function areFieldsValid(): bool
     {
         $validFields = 0;
-        $validFields += $this->validateFirstName();
-        $validFields += $this->validateLastName();
-        $validFields += $this->validatePhone();
-        $validFields += $this->validateSinNumber();
-        $validFields += $this->validatePassword();
-        return ($validFields == 5);
+//        $validFields += $this->validateFirstName();
+//        $validFields += $this->validateLastName();
+//        $validFields += $this->validatePhone();
+//        $validFields += $this->validateSinNumber();
+//        $validFields += $this->validatePassword();
+        $validFields += $this->validateUsernameAndEmail();
+        return ($validFields == 1);
     }
 
     private function validateFirstName(): int
@@ -71,6 +83,26 @@ class RegisterValidator
             $_SESSION['invalidPassword'] = "Le mot de passe doit contenir minimum 8 charactères, 1 majuscule et 1 symbole spécial (@$!%*#?&)";
             return 0;
         }
+        return 1;
+    }
+
+    private function validateUsernameAndEmail() : int {
+        $username = $_POST['username'];
+        $email = $_POST['email'];
+
+        $db = buildDataBase();
+        $result_u = $db->query("SELECT * FROM users WHERE username='$username'");
+        $result_e = $db->query("SELECT * FROM users WHERE email='$email'");
+        if ($db->contains($result_u)) {
+            $_SESSION['registerError'] = "Nom d'utilisateur déjà utilisé...";
+            $db->close();
+            return 0;
+        } else if ($db->contains($result_e)) {
+            $_SESSION['registerError'] = "Adresse courriel déjà utilisé...";
+            $db->close();
+            return 0;
+        }
+        $db->close();
         return 1;
     }
 }

@@ -14,15 +14,15 @@
 </head>
 <body>
 <div class="container w-50 mt-5 pt-5">
-    <h1>Créer un compte</h1>
-    <form class="bg-light p-5 mx-auto border-white" action="registerValidation.php" method="post">
 
+    <form class="bg-light p-5 mx-auto" action="registerValidation.php" method="post">
+        <h1 class="mb-3">Créer un compte</h1>
         <?php
-        if (isset($_SESSION['missingInputs'])) {
+        if (isset($_SESSION['registerError'])) {
             ?>
-            <div class="alert alert-danger p-1 text-sm-start d-inline-block"><?= $_SESSION['missingInputs']?></div>
+            <div class="alert alert-danger p-1 text-sm-start d-inline-block"><?= $_SESSION['registerError']?></div>
             <?php
-            unset($_SESSION['missingInputs']);
+            unset($_SESSION['registerError']);
         }
         ?>
 

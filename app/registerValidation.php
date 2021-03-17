@@ -10,7 +10,7 @@
     $sin = addslashes($_POST['sinNumber'] ?? '');
     $gender = addslashes($_POST['gender'] ?? '');
     $db = buildDataBase();
-    $db->query("INSERT INTO users (username, password, firstname, lastname, email, sin, gender) VALUES ('$username', '$password', '$firstname', '$lastname', '$email', '$sin', '$gender')");
+    $db->query("INSERT INTO users (username, password, firstname, lastname, email, sin, gender, is_admin) VALUES ('$username', '$password', '$firstname', '$lastname', '$email', '$sin', '$gender' '0')");
     $db->close();
     echo password_verify($password . PASSWORD_PEPPER, PASSWORD_DEFAULT);
 ?>

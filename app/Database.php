@@ -34,6 +34,14 @@ class Database
         return mysqli_fetch_assoc($resultSet);
     }
 
+    public function contains($result)
+    {
+        if (mysqli_num_rows($result) > 0) {
+            return true;
+        }
+        return false;
+    }
+
     public function close()
     {
         mysqli_close($this->connection);
