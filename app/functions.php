@@ -25,7 +25,6 @@ function redirect(string $file)
 
 function validateRegisterInputs()
 {
-
     $validator = new RegisterValidator();
     if ($validator->areFieldsEmpty() || !$validator->areFieldsValid()) {
         redirect("register.php");
@@ -34,8 +33,8 @@ function validateRegisterInputs()
 
 function validateAndInsertPoll()
 {
-    $pollName = addslashes($_POST['pollName']);
-    $pollDescription = addslashes($_POST['pollDescription']);
+    $pollName = sanitize($_POST['pollName']);
+    $pollDescription = sanitize($_POST['pollDescription']);
     $db = buildDataBase();
     $resultPoll = $db->query("SELECT * FROM polls WHERE name = '$pollName'");
     if ($db->contains($resultPoll)) {
@@ -50,14 +49,14 @@ function validateAndInsertPoll()
 function validateAndInsertPollChoices()
 {
     $db = buildDataBase();
-    $pollName = addslashes($_POST['pollName']);
+    $pollName = sanitize($_POST['pollName']);
     foreach ($_POST['pollChoices'] as $choice => $value) {
         $key = array_search($value, $_POST['pollChoices']);
         $db->query("INSERT INTO options (value, title, poll_id) VALUES('$key', '$value', (SELECT poll_id FROM polls WHERE name = '$pollName'))");
     }
 }
 
-function areInputsFilled() : bool
+function arePollInputsFilled() : bool
 {
     foreach ($_POST['pollChoices'] as $choice => $value) {
         if ($value == "") {
@@ -76,4 +75,9 @@ function areInputsFilled() : bool
         return false;
     }
     return true;
+}
+
+function sanitize(string $userInput) {
+    return addslashes(strip_tags($userInput));
+
 }

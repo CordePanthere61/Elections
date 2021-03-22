@@ -3,8 +3,8 @@
 require "functions.php";
 
 if (!isset($_SESSION['is_logged'])) {
-    $username = addslashes($_POST['username']) ?? '';
-    $password = addslashes($_POST['password']) ?? '';
+    $username = sanitize($_POST['username']) ?? '';
+    $password = sanitize($_POST['password']) ?? '';
 
     $db = buildDataBase();
 
@@ -50,19 +50,27 @@ if (!isset($_SESSION['is_logged'])) {
 
     <div class="container">
         <br>
-        <h1 class="mb-4 border-bottom border-dark">Sondages disponibles</h1>
+        <h2 class="mb-4 border-bottom border-dark">Sondages disponibles</h2>
 
         <?php
         $db = buildDataBase();
         $result_poll = $db->query("SELECT * FROM polls");
         $result_options = $db->query("SELECT * FROM options");
+        $result_votes = $db->query("SELECT * FROM votes");
+
         $data_polls = array();
         while ($row = $db->fetch($result_poll)) {
             $data_polls[] = $row;
         }
+
         $data_options = array();
         while ($row = $db->fetch($result_options)) {
             $data_options[] = $row;
+        }
+
+        $data_votes = array();
+        while ($row = $db->fetch($result_votes)) {
+            $data_votes[] = $row;
         }
 
         if (mysqli_num_rows($result_poll) < 1) {
@@ -73,21 +81,26 @@ if (!isset($_SESSION['is_logged'])) {
             foreach ($data_polls as $poll) {
                 ?>
                 <div class="card my-4 p-3  border-0 bg-secondary" style="width: 25rem">
-                    <div class="card-header bg-light pt-3 rounded-1 mb-2">
+                    <div class="card-header  bg-light pt-3">
                         <h4 class="fw-bold"><?= $poll['name']?></h4>
+                    </div>
+                    <div class="card-body rounded-bottom bg-light">
                         <p class="card-text mt-2"><?= $poll['description']?></p>
                     </div>
-                    <ul class="list-group list-group-flush d-flex justify-content-evenly h-100">
+                    <ul class="list-group list-group-flush d-flex justify-content-evenly h-100 my-3">
                         <?php
                         foreach ($data_options as $option) {
                             if ($option['poll_id'] == $poll['poll_id']) {
                                 ?>
-                                <li class="list-group-item bg-light my-1 mx-2 rounded-1"><input class="form-check-inline" name="<?= $poll['name'] ?>" type="radio"><label for="<?= $poll['name'] ?>"><?= $option['title'] ?></label></li>
+                                <li class="list-group-item bg-light my-1 mx-2 rounded-pill"><input class="form-check-inline" name="<?= $poll['name'] ?>" type="radio"><label for="<?= $poll['name'] ?>"><?= $option['title'] ?></label></li>
                                 <?php
                             }
                         }
                         ?>
                     </ul>
+                    <div class="card-footer bg-transparent d-flex justify-content-end">
+                        <input class="btn btn-outline-light" type="button" type="submit" value="Soumettre">
+                    </div>
                 </div>
             <?php
             }

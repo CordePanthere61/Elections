@@ -4,7 +4,7 @@ if (!$_SESSION['is_admin']) {
     redirect("home.php");
 }
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if (areInputsFilled()) {
+    if (arePollInputsFilled()) {
         validateAndInsertPoll();
         validateAndInsertPollChoices();
     }
@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
         ?>
         <form class="bg-light p-5 mx-auto" action="createPoll.php" method="post">
-            <h1>Créer un sondage</h1>
+            <h2 class="border-bottom border-dark">Créer un sondage</h2>
             <?php
             if (isset($_SESSION['pollError'])) {
                 ?>
@@ -67,8 +67,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <div class="col-11 input-container">
                             <input class="form-control poll-input" type="text" name="pollChoices[]">
                         </div>
+                    </div><div class="row row-option py-3">
+                        <div class="col-11 input-container">
+                            <input class="form-control poll-input" type="text" name="pollChoices[]">
+                        </div>
                         <div class="col-1 add-button-container"><button type="button" class="btn btn-secondary rounded-circle add-choice"><i class="fa fa-plus"></i></button></div>
-                    </div></div>
+                    </div>
+                </div>
             </div>
 
             <div class="text-end">

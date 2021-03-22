@@ -24,13 +24,13 @@ class RegisterValidator
     public function areFieldsValid(): bool
     {
         $validFields = 0;
-//        $validFields += $this->validateFirstName();
-//        $validFields += $this->validateLastName();
-//        $validFields += $this->validatePhone();
-//        $validFields += $this->validateSinNumber();
-//        $validFields += $this->validatePassword();
+        $validFields += $this->validateFirstName();
+        $validFields += $this->validateLastName();
+        $validFields += $this->validatePhone();
+        $validFields += $this->validateSinNumber();
+        $validFields += $this->validatePassword();
         $validFields += $this->validateUsernameAndEmail();
-        return ($validFields == 1);
+        return ($validFields == 6);
     }
 
     private function validateFirstName(): int

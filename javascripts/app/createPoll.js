@@ -1,6 +1,6 @@
 
 let optionsContainer = document.querySelector(".options-container");
-let buttonContainer = document.querySelector(".row-option").lastElementChild;
+let buttonContainer = document.querySelector(".add-button-container");
 let buttonElem = buttonContainer.firstChild;
 let inputElem = document.querySelector(".row-option").firstElementChild;
 document.querySelector(".add-choice").addEventListener("click", addChoice);
