@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             unset($_SESSION['pollSuccess']);
         }
         ?>
-        <form class="bg-light p-5 mx-auto" action="createPoll.php" method="post">
+        <form class="bg-light p-5 mx-auto rounded-3" action="createPoll.php" method="post">
             <h2 class="border-bottom border-dark">Créer un sondage</h2>
             <?php
             if (isset($_SESSION['pollError'])) {
@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
             <div class="my-3">
                 <label for="pollDescription">Description :</label>
-                <textarea class="form-control" name="pollDescription" cols="30" rows="8"></textarea>
+                <textarea class="form-control" name="pollDescription" cols="30" rows="3"></textarea>
             </div>
 
             <div class="my-3">

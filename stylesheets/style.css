@@ -14,10 +14,6 @@ body {
     font-family: 'Passion One', sans-serif;
 }
 
-form {
-    border-radius: 3%;
-}
-
 .validation-box {
     border-radius: 3%;
 }
@@ -45,4 +41,8 @@ form {
 
 #logout-button:hover {
     color: #c10000 !important;
+}
+
+.logs-container {
+    background-color: #3d3d3d;
 }

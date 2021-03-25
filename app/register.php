@@ -15,7 +15,7 @@
 <body>
 <div class="container w-50 mt-5 pt-5">
 
-    <form class="bg-light p-5 mx-auto" action="registerValidation.php" method="post">
+    <form class="bg-light p-5 mx-auto rounded-3" action="registerValidation.php" method="post">
         <h1 class="mb-3">Créer un compte</h1>
         <?php
         if (isset($_SESSION['registerError'])) {
